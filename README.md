@@ -68,11 +68,13 @@ The web interface has 2 tabs:
 - Overview: Input, Output, Cache, Success, Failed, Avg Duration
 - Charts: Token Distribution, Token % by Model, Requests % by Model
 - Detailed table by model
+<img width="1187" height="790" alt="image" src="https://github.com/user-attachments/assets/3a8f61c9-9c09-4248-9c6f-fba1d08a566d" />
 
 ### Request History
 - Request logs with full info: time, model, duration, tokens, status
 - Filter by time: Today, 7 Days, 30 Days, Custom
 - Delete history: all or by date
+<img width="1167" height="865" alt="image" src="https://github.com/user-attachments/assets/24d9f8fb-1029-47cd-a604-35d55be206da" />
 
 ### Common Features
 - Dark/Light theme (Dark by default)
