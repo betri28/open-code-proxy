@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCode Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OpenCode Dashboard</h1>
+        </header>
+        <button class="theme-toggle" id="theme-toggle" title="Toggle theme">☾</button>
+
+        <div class="filter-bar">
+            <nav class="tabs">
+                <button class="tab active" data-tab="stats">Token Stats</button>
+                <button class="tab" data-tab="logs">Logs</button>
+            </nav>
+            <div class="filter-controls">
+                <button class="btn active" data-range="today">Today</button>
+                <button class="btn" data-range="7d">7 Days</button>
+                <button class="btn" data-range="30d">30 Days</button>
+                <button class="btn" data-range="custom">Custom</button>
+                <input type="date" id="from-date" class="date-input" style="display:none">
+                <span id="date-sep" style="display:none">to</span>
+                <input type="date" id="to-date" class="date-input" style="display:none">
+                <button class="btn" id="apply-filter" style="display:none">Apply</button>
+            </div>
+        </div>
+
+        <main>
+            <section id="stats" class="tab-content active">
+                <div class="card">
+                    <h2>Overview</h2>
+                    <div class="totals">
+                        <div class="stat-box">
+                            <span class="label">Input</span>
+                            <span class="value" id="total-input">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="label">Output</span>
+                            <span class="value" id="total-output">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="label">Cache</span>
+                            <span class="value" id="total-cache">0</span>
+                        </div>
+                        <div class="stat-box highlight">
+                            <span class="label">Total</span>
+                            <span class="value" id="total-all">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="label">Success</span>
+                            <span class="value status-ok" id="total-success">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="label">Failed</span>
+                            <span class="value status-fail" id="total-fail">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="label">Avg Duration</span>
+                            <span class="value" id="avg-duration">0ms</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="card chart-card">
+                        <h2>Token Distribution</h2>
+                        <canvas id="chart-tokens" width="300" height="300"></canvas>
+                    </div>
+                    <div class="card chart-card">
+                        <h2>Token % by Model</h2>
+                        <canvas id="chart-model-tokens" width="300" height="300"></canvas>
+                    </div>
+                    <div class="card chart-card">
+                        <h2>Requests % by Model</h2>
+                        <canvas id="chart-model-requests" width="300" height="300"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>By Model</h2>
+                    <table id="model-table">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Input</th>
+                                <th>Output</th>
+                                <th>Cache</th>
+                                <th>Total</th>
+                                <th>%</th>
+                                <th>Success</th>
+                                <th>Failed</th>
+                                <th>Avg Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody id="model-tbody">
+                            <tr><td colspan="9">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="logs" class="tab-content">
+                <div class="card">
+                    <h2>Request History</h2>
+                    <table id="history-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Original Model</th>
+                                <th>Mapped Model</th>
+                                <th>Duration</th>
+                                <th>Input</th>
+                                <th>Output</th>
+                                <th>Cache</th>
+                                <th>Status</th>
+                                <th>Error</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-tbody">
+                            <tr><td colspan="9">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="pagination">
+                        <button class="btn" id="prev-page">&laquo; Previous</button>
+                        <span id="page-info">Page 1</span>
+                        <button class="btn" id="next-page">Next &raquo;</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <span id="last-update">Last update: --</span>
+            <div class="delete-section">
+                <div class="delete-menu" id="delete-menu" style="display:none">
+                    <button class="delete-option" id="delete-all-opt">Delete All</button>
+                    <button class="delete-option" id="delete-by-date-opt">Delete Before Date</button>
+                </div>
+                <button class="btn btn-danger" id="delete-btn">Delete History</button>
+            </div>
+        </footer>
+
+        <div class="modal-overlay" id="delete-modal" style="display:none">
+            <div class="modal">
+                <h3>Delete History Before</h3>
+                <input type="date" id="delete-date" class="date-input modal-date">
+                <div class="modal-buttons">
+                    <button class="btn btn-danger" id="modal-delete-btn">Delete</button>
+                    <button class="btn" id="modal-cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
