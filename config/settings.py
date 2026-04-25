@@ -32,6 +32,8 @@ MODELS = {
     "glm-5"            : {"endpoint": API_BASE_OPENAI,    "protocol": "openai"},
     "kimi-k2.5"        : {"endpoint": API_BASE_OPENAI,    "protocol": "openai"},
     "kimi-k2.6"        : {"endpoint": API_BASE_OPENAI,    "protocol": "openai"},
+    "deepseek-v4-pro"  : {"endpoint": API_BASE_ANTHROPIC, "protocol": "anthropic"},
+    "deepseek-v4-flash": {"endpoint": API_BASE_ANTHROPIC, "protocol": "anthropic"},
     "mimo-v2-pro"      : {"endpoint": API_BASE_OPENAI,    "protocol": "openai"},
     "mimo-v2-omni"     : {"endpoint": API_BASE_OPENAI,    "protocol": "openai"},
     "mimo-v2.5-pro"    : {"endpoint": API_BASE_OPENAI,    "protocol": "openai"},
